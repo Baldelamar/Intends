@@ -33,59 +33,68 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    // Botón para abrir YouTube (Intent Explícito)
+    // BOTON PARA ABRIR YOUTUBE (INTENT EXPLICITO)
     Button btnYouTube = findViewById(R.id.btnYouTube);
     btnYouTube.setOnClickListener(v -> {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.youtube.com/"));
+        Intent intent = new Intent();
+        // AQUI INDICO EL NOMBRE DEL PAQUETE ESPECIFICO ASI COMO LA ACTIVIDAD QUE DESEO ABRIR
+        intent.setClassName("com.google.android.youtube",
+                "com.google.android.youtube.HomeActivity");
         startActivity(intent);
     });
 
-    // Botón para abrir Facebook (Intent Explícito)
+    // BOTON PARA ABRIR FACEBOOK (INTENT EXPLICITO)
     Button btnFacebook = findViewById(R.id.btnFacebook);
     btnFacebook.setOnClickListener(v -> {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.facebook.com/"));
+        Intent intent = new Intent();
+        // AQUI INDICO EL NOMBRE DEL PAQUETE ASI COMO LA ACTIVIDAD QUE DESEO ABRIR
+        intent.setClassName("com.facebook.katana",
+                "com.facebook.katana.LoginActivity");
         startActivity(intent);
     });
 
-    // Botón para abrir Twitter (Intent Explícito)
+    // BOTON PARA ABRIR TWITTER (INTENT EXPLICITO)
     Button btnTwitter = findViewById(R.id.btnTwitter);
     btnTwitter.setOnClickListener(v -> {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.twitter.com/"));
+        Intent intent = new Intent();
+        // AQUI INDICO EL NOMBRE DEL PAQUETE ESPECIFICO ASI COMO LA ACTIVIDAD QUE DESEO ABRIR
+        intent.setClassName("com.twitter.android",
+                "com.twitter.android.StartActivity");
         startActivity(intent);
     });
 
-    // Botón para abrir Twitch (Intent Implícito)
+    // BOTON PARA ABRIR TWITCH (INTENT IMPLICITO)
     Button btnTwitch = findViewById(R.id.btnTwitch);
     btnTwitch.setOnClickListener(v -> {
+        // AQUI LE INDICO QUE DEBE ABRIR ALGO
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        //PERO NO LE DIGO CON QUE APLICACION LO DEBE ABRIR
         intent.setData(Uri.parse("https://www.twitch.tv/"));
         startActivity(intent);
     });
 
-    // Botón para abrir Wikipedia (Intent Implícito)
+    // BOTON PARA ABRIR WIKIPEDIA (INTENT IMPLICITO)
     Button btnWikipedia = findViewById(R.id.btnWikipedia);
     btnWikipedia.setOnClickListener(v -> {
+        // AQUI LE INDICO QUE DEBE ABRIR ALGO
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        // PERO NO LE DIGO CON QUE APLICACION LO DEBE ABRIR
         intent.setData(Uri.parse("https://www.wikipedia.org/"));
         startActivity(intent);
     });
 
-    // Botón para abrir WhatsApp (Intent Implícito)
+    // BOTÓN PARA COMPARTIR UN MENSAJE  (INTENT IMPLÍCITO)
     Button btnWhatsApp = findViewById(R.id.btnWhatsApp);
     btnWhatsApp.setOnClickListener(v -> {
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.whatsapp");
-        if (intent != null) {
-            startActivity(intent);
-        } else {
-            // Acción cuando WhatsApp no está instalado
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp"));
-            startActivity(intent);
-        }
+        // AQUI LE INDICO QUE DEBE HACER ALGO
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        // PERO NO LE DIGO CON QUE APICACION LO DEBE HACER
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "Este es un mensaje para compartir"); // Mensaje que deseas compartir
+
+        startActivity(intent);
     });
 }
+
 }
 
